@@ -4,12 +4,9 @@
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
 public class Hunter {
-    //Keeps the items in the kit separate
-    private static final String KIT_DELIMITER = ";";
-
     //instance variables
     private String hunterName;
-    private String kit;
+    private String[] kit;
     private int gold;
 
     //Constructor
@@ -20,7 +17,7 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = "";
+        kit = new String[5]; // only 5 possible items can be stored in kit
         gold = startingGold;
     }
 
@@ -29,7 +26,7 @@ public class Hunter {
         return hunterName;
     }
 
-    public String getKit() {
+    public String[] getKit() {
         return kit;
     }
 
@@ -85,16 +82,11 @@ public class Hunter {
      * @param item The item to be removed.
      */
     public void removeItemFromKit(String item) {
-        int itmIdx = kit.indexOf(item);
+        int itmIdx = findItemInKit(item);
 
         // if item is found
         if (itmIdx >= 0) {
-            String tmpKit = kit.substring(0, itmIdx);
-            int endIdx = kit.indexOf(KIT_DELIMITER, itmIdx);
-            tmpKit += kit.substring(endIdx + 1);
-
-            // update kit
-            kit = tmpKit;
+            kit[itmIdx] = null;
         }
     }
 
@@ -108,7 +100,8 @@ public class Hunter {
      */
     private boolean addItem(String item) {
         if (!hasItemInKit(item)) {
-            kit += item + KIT_DELIMITER;
+            int idx = emptyElementInKit();
+            kit[idx] = item;
             return true;
         }
 
@@ -122,17 +115,14 @@ public class Hunter {
      * @return true if the item is found.
      */
     public boolean hasItemInKit(String item) {
-        int placeholder = 0;
-
-        while (placeholder < kit.length() - 1) {
-            int endOfItem = kit.indexOf(KIT_DELIMITER, placeholder);
-            String tmpItem = kit.substring(placeholder, endOfItem);
-            placeholder = endOfItem + 1;
-            if (tmpItem.equals(item)) {
+        for (int i = 0; i < kit.length; i++) {
+            String tmpItem = kit[i];
+            if (item.equals(tmpItem)) {
                 // early return
                 return true;
             }
         }
+
         return false;
     }
 
@@ -143,15 +133,15 @@ public class Hunter {
      * @return The printable String representation of the inventory
      */
     public String getInventory() {
-        String printableKit = kit;
+        String printableKit = "";
         String space = " ";
 
-        int index = 0;
-
-        while (printableKit.indexOf(KIT_DELIMITER) != -1) {
-            index = printableKit.indexOf(KIT_DELIMITER);
-            printableKit = printableKit.substring(0, index) + space + printableKit.substring(index + 1);
+        for (int i = 0; i < kit.length; i++) {
+            if (kit[i] != null) {
+                printableKit += kit[i] + space;
+            }
         }
+
         return printableKit;
     }
 
@@ -160,9 +150,41 @@ public class Hunter {
      */
     public String toString() {
         String str = hunterName + " has " + gold + " gold";
-        if (!kit.equals("")) {
+        if (!kitIsEmpty()) {
             str += " and " + getInventory();
         }
         return str;
+    }
+
+    private int findItemInKit(String item) {
+        for (int i = 0; i < kit.length; i++) {
+            String tmpItem = kit[i];
+
+            if (item.equals(tmpItem)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private boolean kitIsEmpty() {
+        for (int i = 0; i < kit.length; i++) {
+            if (kit[i] != null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private int emptyElementInKit() {
+        for (int i = 0; i < kit.length; i++) {
+            if (kit[i] == null) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
