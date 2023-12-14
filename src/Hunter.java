@@ -115,8 +115,7 @@ public class Hunter {
      * @return true if the item is found.
      */
     public boolean hasItemInKit(String item) {
-        for (int i = 0; i < kit.length; i++) {
-            String tmpItem = kit[i];
+        for (String tmpItem : kit) {
             if (item.equals(tmpItem)) {
                 // early return
                 return true;
@@ -136,9 +135,9 @@ public class Hunter {
         String printableKit = "";
         String space = " ";
 
-        for (int i = 0; i < kit.length; i++) {
-            if (kit[i] != null) {
-                printableKit += kit[i] + space;
+        for (String string : kit) {
+            if (string != null) {
+                printableKit += string + space;
             }
         }
 
