@@ -3,10 +3,12 @@
  * This class represents the treasure hunter character (the player) in the Treasure Hunt game.
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
+import java.util.ArrayList;
+
 public class Hunter {
     //instance variables
     private String hunterName;
-    private String[] kit;
+    private ArrayList<String> kit;
     private int gold;
 
     //Constructor
@@ -17,7 +19,7 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = new String[5]; // only 5 possible items can be stored in kit
+        kit = new ArrayList<String>();
         gold = startingGold;
     }
 
@@ -26,7 +28,7 @@ public class Hunter {
         return hunterName;
     }
 
-    public String[] getKit() {
+    public ArrayList<String> getKit() {
         return kit;
     }
 
@@ -86,7 +88,7 @@ public class Hunter {
 
         // if item is found
         if (itmIdx >= 0) {
-            kit[itmIdx] = null;
+            kit.remove(itmIdx);
         }
     }
 
@@ -100,8 +102,7 @@ public class Hunter {
      */
     private boolean addItem(String item) {
         if (!hasItemInKit(item)) {
-            int idx = emptyElementInKit();
-            kit[idx] = item;
+            kit.add(item);
             return true;
         }
 
@@ -115,8 +116,7 @@ public class Hunter {
      * @return true if the item is found.
      */
     public boolean hasItemInKit(String item) {
-        for (int i = 0; i < kit.length; i++) {
-            String tmpItem = kit[i];
+        for (String tmpItem : kit) {
             if (item.equals(tmpItem)) {
                 // early return
                 return true;
@@ -136,10 +136,8 @@ public class Hunter {
         String printableKit = "";
         String space = " ";
 
-        for (int i = 0; i < kit.length; i++) {
-            if (kit[i] != null) {
-                printableKit += kit[i] + space;
-            }
+        for (String item : kit) {
+            printableKit += item + space;
         }
 
         return printableKit;
@@ -157,34 +155,20 @@ public class Hunter {
     }
 
     private int findItemInKit(String item) {
-        for (int i = 0; i < kit.length; i++) {
-            String tmpItem = kit[i];
+        for (int i = 0; i < kit.size(); i++) {
+            String tmpItem = kit.get(i);
 
             if (item.equals(tmpItem)) {
                 return i;
             }
         }
-
         return -1;
     }
 
     private boolean kitIsEmpty() {
-        for (int i = 0; i < kit.length; i++) {
-            if (kit[i] != null) {
-                return false;
-            }
+        if (kit.isEmpty()) {
+            return true;
         }
-
-        return true;
-    }
-
-    private int emptyElementInKit() {
-        for (int i = 0; i < kit.length; i++) {
-            if (kit[i] == null) {
-                return i;
-            }
-        }
-
-        return -1;
+        return false;
     }
 }
