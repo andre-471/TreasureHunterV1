@@ -129,7 +129,7 @@ public class Hunter {
             int endOfItem = kit.indexOf(KIT_DELIMITER, placeholder);
             String tmpItem = kit.substring(placeholder, endOfItem);
             placeholder = endOfItem + 1;
-            if (tmpItem.equalsIgnoreCase(item)) {
+            if (tmpItem.equals(item)) {
                 // early return
                 return true;
             }
