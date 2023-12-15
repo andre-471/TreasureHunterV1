@@ -1,10 +1,10 @@
+import java.util.Scanner;
+
 /**
- * The Shop class controls the cost of the items in the Treasure Hunt game.<p>
- * The Shop class also acts as a go between for the Hunter's buyItem() method.<p>
+ * The Shop class controls the cost of the items in the Treasure Hunt game. <p>
+ * The Shop class also acts as a go between for the Hunter's buyItem() method. <p>
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
-
-import java.util.Scanner;
 
 public class Shop {
     // constants
@@ -30,7 +30,7 @@ public class Shop {
     /**
      * Method for entering the shop.
      *
-     * @param hunter  the Hunter entering the shop
+     * @param hunter the Hunter entering the shop
      * @param buyOrSell String that determines if hunter is "B"uying or "S"elling
      */
     public void enter(Hunter hunter, String buyOrSell) {
