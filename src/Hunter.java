@@ -3,6 +3,7 @@
  * This class represents the treasure hunter character (the player) in the Treasure Hunt game.
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
+
 public class Hunter {
     //instance variables
     private String hunterName;
@@ -41,7 +42,7 @@ public class Hunter {
     /**
      * Buys an item from a shop.
      *
-     * @param item The item the hunter is buying.
+     * @param item       The item the hunter is buying.
      * @param costOfItem the cost of the item
      * @return true if the item is successfully bought.
      */
@@ -59,7 +60,7 @@ public class Hunter {
      * The Hunter is selling an item to a shop for gold.<p>
      * This method checks to make sure that the seller has the item and that the seller is getting more than 0 gold.
      *
-     * @param item The item being sold.
+     * @param item         The item being sold.
      * @param buyBackPrice the amount of gold earned from selling the item
      * @return true if the item was successfully sold.
      */
@@ -153,6 +154,7 @@ public class Hunter {
 
     /**
      * Searches kit for the specified value.
+     *
      * @param item Value to look for.
      * @return The index of the item, or -1 if not found.
      */

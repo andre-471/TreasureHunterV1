@@ -27,9 +27,11 @@ public class Shop {
         customer = null;
     }
 
-    /** method for entering the shop
+    /**
+     * Method for entering the shop.
+     *
      * @param hunter  the Hunter entering the shop
-     * @param buyOrSell  String that determines if hunter is "B"uying or "S"elling
+     * @param buyOrSell String that determines if hunter is "B"uying or "S"elling
      */
     public void enter(Hunter hunter, String buyOrSell) {
         customer = hunter;
@@ -69,7 +71,9 @@ public class Shop {
         }
     }
 
-    /** A method that returns a string showing the items available in the shop (all shops sell the same items).
+    /**
+     * A method that returns a string showing the items available in the shop
+     * (all shops sell the same items).
      *
      * @return the string representing the shop's items available for purchase and their prices.
      */
@@ -85,6 +89,7 @@ public class Shop {
 
     /**
      * A method that lets the customer (a Hunter) buy an item.
+     *
      * @param item The item being bought.
      */
     public void buyItem(String item) {
@@ -98,6 +103,7 @@ public class Shop {
 
     /**
      * A pathway method that lets the Hunter sell an item.
+     *
      * @param item The item being sold.
      */
     public void sellItem(String item) {
@@ -111,6 +117,7 @@ public class Shop {
 
     /**
      * Determines and returns the cost of buying or selling an item.
+     *
      * @param item The item in question.
      * @param isBuying Whether the item is being bought or sold.
      * @return The cost of buying or selling the item based on the isBuying parameter.
