@@ -1,9 +1,10 @@
+import java.util.Scanner;
+
 /**
- * The Shop class controls the cost of the items in the Treasure Hunt game.<p>
- * The Shop class also acts as a go between for the Hunter's buyItem() method.<p>
+ * The Shop class controls the cost of the items in the Treasure Hunt game. <p>
+ * The Shop class also acts as a go between for the Hunter's buyItem() method. <p>
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
-import java.util.Scanner;
 
 public class Shop {
     // constants
@@ -13,62 +14,72 @@ public class Shop {
     private static final int HORSE_COST = 12;
     private static final int BOAT_COST = 20;
 
+    // static variables
+    private static final Scanner SCANNER = new Scanner(System.in);
+
     // instance variables
     private double markdown;
     private Hunter customer;
 
-    //Constructor
+    /**
+     * The Shop constructor takes in a markdown value and leaves customer null until one enters the shop.
+     *
+     * @param markdown Percentage of markdown for selling items in decimal format.
+     */
     public Shop(double markdown) {
         this.markdown = markdown;
-        customer = null;
+        customer = null; // is set in the enter method
     }
 
-    /** method for entering the shop
-     * @param hunter  the Hunter entering the shop
-     * @param buyOrSell  String that determines if hunter is "B"uying or "S"elling
+    /**
+     * Method for entering the shop.
+     *
+     * @param hunter the Hunter entering the shop
+     * @param buyOrSell String that determines if hunter is "B"uying or "S"elling
      */
     public void enter(Hunter hunter, String buyOrSell) {
         customer = hunter;
 
-        Scanner scanner = new Scanner(System.in);
-        if (buyOrSell.equals("B") || buyOrSell.equals("b")) {
+        if (buyOrSell.equals("b")) {
             System.out.println("Welcome to the shop! We have the finest wares in town.");
             System.out.println("Currently we have the following items:");
             System.out.println(inventory());
             System.out.print("What're you lookin' to buy? ");
-            String item = scanner.nextLine();
+            String item = SCANNER.nextLine().toLowerCase();
             int cost = checkMarketPrice(item, true);
             if (cost == 0) {
                 System.out.println("We ain't got none of those.");
             } else {
                 System.out.print("It'll cost you " + cost + " gold. Buy it (y/n)? ");
-                String option = scanner.nextLine();
+                String option = SCANNER.nextLine().toLowerCase();
 
-                if (option.equals("y") || option.equals("Y")) {
+                if (option.equals("y")) {
                     buyItem(item);
                 }
             }
         } else {
             System.out.println("What're you lookin' to sell? ");
             System.out.print("You currently have the following items: " + customer.getInventory());
-            String item = scanner.nextLine();
+            String item = SCANNER.nextLine().toLowerCase();
             int cost = checkMarketPrice(item, false);
             if (cost == 0) {
                 System.out.println("We don't want none of those.");
             } else {
                 System.out.print("It'll get you " + cost + " gold. Sell it (y/n)? ");
-                String option = scanner.nextLine();
+                String option = SCANNER.nextLine().toLowerCase();
 
-                if (option.equals("y") || option.equals("Y")) {
+                if (option.equals("y")) {
                     sellItem(item);
                 }
             }
         }
     }
 
-    /** A method that returns a string showing the items available in the shop (all shops sell the same items)
+    /**
+     * A method that returns a string showing the items available in the shop
+     * (all shops sell the same items).
      *
-     * @return the string representing the shop's items available for purchase and their prices
+     * @return the string representing the shop's items available for purchase and their prices.
      */
     public String inventory() {
         String str = "Water: " + WATER_COST + " gold\n";
@@ -82,6 +93,7 @@ public class Shop {
 
     /**
      * A method that lets the customer (a Hunter) buy an item.
+     *
      * @param item The item being bought.
      */
     public void buyItem(String item) {
@@ -95,6 +107,7 @@ public class Shop {
 
     /**
      * A pathway method that lets the Hunter sell an item.
+     *
      * @param item The item being sold.
      */
     public void sellItem(String item) {
@@ -108,6 +121,7 @@ public class Shop {
 
     /**
      * Determines and returns the cost of buying or selling an item.
+     *
      * @param item The item in question.
      * @param isBuying Whether the item is being bought or sold.
      * @return The cost of buying or selling the item based on the isBuying parameter.
@@ -127,15 +141,15 @@ public class Shop {
      * @return The cost of the item or 0 if the item is not found.
      */
     public int getCostOfItem(String item) {
-        if (item.equals("Water") || item.equals("water")) {
+        if (item.equals("water")) {
             return WATER_COST;
-        } else if (item.equals("Rope") || item.equals("rope")) {
+        } else if (item.equals("rope")) {
             return ROPE_COST;
-        } else if (item.equals("Machete") || item.equals("machete")) {
+        } else if (item.equals("machete")) {
             return MACHETE_COST;
-        } else if (item.equals("Horse") || item.equals("horse")) {
+        } else if (item.equals("horse")) {
             return HORSE_COST;
-        } else if (item.equals("Boat") || item.equals("boat")) {
+        } else if (item.equals("boat")) {
             return BOAT_COST;
         } else {
             return 0;

@@ -3,17 +3,18 @@
  * This class represents the treasure hunter character (the player) in the Treasure Hunt game.
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
+
 public class Hunter {
     //instance variables
     private String hunterName;
     private String[] kit;
     private int gold;
 
-    //Constructor
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
      *
-     * @param name The hunter's name.
+     * @param hunterName The hunter's name.
+     * @param startingGold The gold the hunter starts with.
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
@@ -26,14 +27,11 @@ public class Hunter {
         return hunterName;
     }
 
-    public String[] getKit() {
-        return kit;
-    }
-
-    public int getGold() {
-        return gold;
-    }
-
+    /**
+     * Updates the amount of gold the hunter has.
+     *
+     * @param modifier Amount to modify gold by.
+     */
     public void changeGold(int modifier) {
         gold += modifier;
         if (gold < 0) {
@@ -45,7 +43,7 @@ public class Hunter {
      * Buys an item from a shop.
      *
      * @param item The item the hunter is buying.
-     * @param costOfItem the cost of the item
+     * @param costOfItem The cost of the item.
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
@@ -77,7 +75,7 @@ public class Hunter {
     }
 
     /**
-     * Removes an item from the kit.
+     * Removes an item from the kit by setting the index of the item to null.
      *
      * @param item The item to be removed.
      */
@@ -92,15 +90,14 @@ public class Hunter {
 
     /**
      * Checks to make sure that the item is not already in the kit.
-     * If not, it adds an item to the end of the String representing the hunter's kit.<br /><br />
-     * A KIT_DELIMITER character is added to the end of the of String.
+     * If not, it assigns the item to an index in the kit with a null value ("empty" position).
      *
      * @param item The item to be added to the kit.
-     * @returns true if the item is not in the kit and has been added.
+     * @return true if the item is not in the kit and has been added.
      */
     private boolean addItem(String item) {
         if (!hasItemInKit(item)) {
-            int idx = emptyElementInKit();
+            int idx = emptyPositionInKit();
             kit[idx] = item;
             return true;
         }
@@ -109,7 +106,7 @@ public class Hunter {
     }
 
     /**
-     * Searches the kit String for a specified item.
+     * Checks if the kit Array has the specified item.
      *
      * @param item The search item
      * @return true if the item is found.
@@ -125,19 +122,19 @@ public class Hunter {
         return false;
     }
 
-    /**
+     /**
      * Returns a printable representation of the inventory, which
-     * is a list of the items in kit, with the KIT_DELIMITER replaced with a space
+     * is a list of the items in kit, with a space between each item.
      *
-     * @return The printable String representation of the inventory
+     * @return The printable String representation of the inventory.
      */
     public String getInventory() {
         String printableKit = "";
         String space = " ";
 
-        for (String string : kit) {
-            if (string != null) {
-                printableKit += string + space;
+        for (String item : kit) {
+            if (item != null) {
+                printableKit += item + space;
             }
         }
 
@@ -155,6 +152,12 @@ public class Hunter {
         return str;
     }
 
+    /**
+     * Searches kit Array for the index of the specified value.
+     *
+     * @param item String to look for.
+     * @return The index of the item, or -1 if not found.
+     */
     private int findItemInKit(String item) {
         for (int i = 0; i < kit.length; i++) {
             String tmpItem = kit[i];
@@ -167,9 +170,14 @@ public class Hunter {
         return -1;
     }
 
+    /**
+     * Check if the kit is empty - meaning all elements are null.
+     *
+     * @return true if kit is completely empty.
+     */
     private boolean kitIsEmpty() {
-        for (int i = 0; i < kit.length; i++) {
-            if (kit[i] != null) {
+        for (String string : kit) {
+            if (string != null) {
                 return false;
             }
         }
@@ -177,7 +185,12 @@ public class Hunter {
         return true;
     }
 
-    private int emptyElementInKit() {
+    /**
+     * Finds the first index where there is a null value.
+     *
+     * @return index of empty index, or -1 if not found.
+     */
+    private int emptyPositionInKit() {
         for (int i = 0; i < kit.length; i++) {
             if (kit[i] == null) {
                 return i;

@@ -2,8 +2,9 @@
  * The Terrain class is designed to represent the zones between the towns in the Treasure Hunter game.
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
+
 public class Terrain {
-    //instance variables
+    // instance variables
     private String terrainName;
     private String neededItem;
 
@@ -15,10 +16,10 @@ public class Terrain {
      */
     public Terrain(String name, String item) {
         terrainName = name;
-        neededItem = item;
+        neededItem = item.toLowerCase();
     }
 
-    //Accessors
+    // accessors
     public String getTerrainName() {
         return terrainName;
     }
@@ -29,10 +30,10 @@ public class Terrain {
 
     /**
      * Guards against a hunter crossing the zone without the proper item.
-     * Searches the hunter's inventory for the proper item and determines whether or not the hunter can cross.
+     * Searches the hunter's inventory for the proper item and determines whether the hunter can cross.
      *
      * @param hunter The Hunter object trying to cross the terrain.
-     * @returns true if the Hunter has the proper item.
+     * @return true if the Hunter has the proper item.
      */
     public boolean canCrossTerrain(Hunter hunter) {
         if (hunter.hasItemInKit(neededItem)) {
@@ -41,7 +42,9 @@ public class Terrain {
         return false;
     }
 
-    //toString
+    /**
+     * @return A string representation of the terrain and item to cross it.
+     */
     public String toString() {
         return terrainName + " needs a(n) " + neededItem + " to cross.";
     }

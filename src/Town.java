@@ -1,22 +1,22 @@
 /**
  * The Town Class is where it all happens.
- * The Town is designed to manage all of the things a Hunter can do in town.
+ * The Town is designed to manage all the things a Hunter can do in town.
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
+
 public class Town {
-    //instance variables
+    // instance variables
     private Hunter hunter;
     private Shop shop;
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
 
-    //Constructor
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
      *
-     * @param s The town's shoppe.
-     * @param t The surrounding terrain.
+     * @param shop The town's shoppe.
+     * @param toughness The surrounding terrain.
      */
     public Town(Shop shop, double toughness) {
         this.shop = shop;
@@ -39,7 +39,7 @@ public class Town {
     /**
      * Assigns an object to the Hunter in town.
      *
-     * @param h The arriving Hunter.
+     * @param hunter The arriving Hunter.
      */
     public void hunterArrives(Hunter hunter) {
         this.hunter = hunter;
@@ -74,6 +74,11 @@ public class Town {
         return false;
     }
 
+    /**
+     * Handles calling the enter method on shop whenever the user wants to access the shop.
+     *
+     * @param choice If the user wants to buy or sell items at the shop.
+     */
     public void enterShop(String choice) {
         shop.enter(hunter, choice);
     }
@@ -103,7 +108,7 @@ public class Town {
             } else {
                 printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
                 printMessage += "\nYou lost the brawl and pay " + goldDiff + " gold.";
-                hunter.changeGold(-1 * goldDiff);
+                hunter.changeGold(-goldDiff);
             }
         }
     }
@@ -133,7 +138,7 @@ public class Town {
     }
 
     /**
-     * Determines whether or not a used item has broken.
+     * Determines whether a used item has broken.
      *
      * @return true if the item broke.
      */
