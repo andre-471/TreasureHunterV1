@@ -1,19 +1,19 @@
 /**
  * This class is responsible for controlling the Treasure Hunter game.<p>
  * It handles the display of the menu and the processing of the player's choices.<p>
- * It handles all of the display based on the messages it receives from the Town object.
+ * It handles all of the display based on the messages it receives from the Town object.<p>
  *
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
+
 import java.util.Scanner;
 
 public class TreasureHunter {
-    //Instance variables
+    // instance variables
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
 
-    //Constructor
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -24,7 +24,9 @@ public class TreasureHunter {
         hardMode = false;
     }
 
-    // starts the game; this is the only public method
+    /**
+     * Starts the game; this is the only public method
+     */
     public void play() {
         welcomePlayer();
         enterTown();
@@ -119,7 +121,7 @@ public class TreasureHunter {
             currentTown.enterShop(choice);
         } else if (choice.equals("M") || choice.equals("m")) {
             if (currentTown.leaveTown()) {
-                //This town is going away so print its news ahead of time.
+                // This town is going away so print its news ahead of time.
                 System.out.println(currentTown.getLatestNews());
                 enterTown();
             }

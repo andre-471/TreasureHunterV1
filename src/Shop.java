@@ -3,6 +3,7 @@
  * The Shop class also acts as a go between for the Hunter's buyItem() method.<p>
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
+
 import java.util.Scanner;
 
 public class Shop {
@@ -17,7 +18,7 @@ public class Shop {
     private double markdown;
     private Hunter customer;
 
-    //Constructor
+    // constructor
     public Shop(double markdown) {
         this.markdown = markdown;
         customer = null;
@@ -66,9 +67,9 @@ public class Shop {
         }
     }
 
-    /** A method that returns a string showing the items available in the shop (all shops sell the same items)
+    /** A method that returns a string showing the items available in the shop (all shops sell the same items).
      *
-     * @return the string representing the shop's items available for purchase and their prices
+     * @return the string representing the shop's items available for purchase and their prices.
      */
     public String inventory() {
         String str = "Water: " + WATER_COST + " gold\n";
