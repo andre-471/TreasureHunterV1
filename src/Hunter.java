@@ -176,8 +176,8 @@ public class Hunter {
      * @return true if kit is completely empty.
      */
     private boolean kitIsEmpty() {
-        for (int i = 0; i < kit.length; i++) {
-            if (kit[i] != null) {
+        for (String string : kit) {
+            if (string != null) {
                 return false;
             }
         }
