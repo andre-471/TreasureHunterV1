@@ -13,7 +13,7 @@ public class Hunter {
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
      *
      * @param hunterName The hunter's name.
-     * @param startingGold Amount of gold hunter will have,
+     * @param startingGold The gold the hunter starts with.
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
@@ -123,7 +123,7 @@ public class Hunter {
 
     /**
      * Returns a printable representation of the inventory, which
-     * is a list of the items in kit, with a space between each item.
+     * is a list of the items in kit, with the KIT_DELIMITER replaced with a space
      *
      * @return The printable String representation of the inventory.
      */

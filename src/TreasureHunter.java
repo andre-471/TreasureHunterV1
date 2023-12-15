@@ -1,7 +1,7 @@
 /**
  * This class is responsible for controlling the Treasure Hunter game.<p>
  * It handles the display of the menu and the processing of the player's choices.<p>
- * It handles all of the display based on the messages it receives from the Town object.<p>
+ * It handles all the display based on the messages it receives from the Town object. <p>
  *
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
@@ -9,6 +9,9 @@
 import java.util.Scanner;
 
 public class TreasureHunter {
+    // static variables
+    private static final Scanner SCANNER = new Scanner(System.in);
+
     // instance variables
     private Town currentTown;
     private Hunter hunter;
@@ -37,19 +40,17 @@ public class TreasureHunter {
      * Creates a hunter object at the beginning of the game and populates the class member variable with it.
      */
     private void welcomePlayer() {
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("Welcome to TREASURE HUNTER!");
         System.out.println("Going hunting for the big treasure, eh?");
         System.out.print("What's your name, Hunter? ");
-        String name = scanner.nextLine();
+        String name = SCANNER.nextLine().toLowerCase();
 
         // set hunter instance variable
         hunter = new Hunter(name, 10);
 
         System.out.print("Hard mode? (y/n): ");
-        String hard = scanner.nextLine();
-        if (hard.equals("y") || hard.equals("Y")) {
+        String hard = SCANNER.nextLine().toLowerCase();
+        if (hard.equals("y")) {
             hardMode = true;
         }
     }
@@ -91,10 +92,9 @@ public class TreasureHunter {
      * This method will loop until the user chooses to exit.
      */
     private void showMenu() {
-        Scanner scanner = new Scanner(System.in);
         String choice = "";
 
-        while (!(choice.equals("X") || choice.equals("x"))) {
+        while (!choice.equals("x")) {
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
@@ -107,7 +107,7 @@ public class TreasureHunter {
             System.out.println("Give up the hunt and e(X)it.");
             System.out.println();
             System.out.print("What's your next move? ");
-            choice = scanner.nextLine();
+            choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice);
         }
     }
@@ -117,17 +117,17 @@ public class TreasureHunter {
      * @param choice The action to process.
      */
     private void processChoice(String choice) {
-        if (choice.equals("B") || choice.equals("b") || choice.equals("S") || choice.equals("s")) {
+        if (choice.equals("b") || choice.equals("s")) {
             currentTown.enterShop(choice);
-        } else if (choice.equals("M") || choice.equals("m")) {
+        } else if (choice.equals("m")) {
             if (currentTown.leaveTown()) {
                 // This town is going away so print its news ahead of time.
                 System.out.println(currentTown.getLatestNews());
                 enterTown();
             }
-        } else if (choice.equals("L") || choice.equals("l")) {
+        } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
-        } else if (choice.equals("X") || choice.equals("x")) {
+        } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
         } else {
             System.out.println("Yikes! That's an invalid option! Try again.");
