@@ -1,10 +1,10 @@
+import java.util.Scanner;
+
 /**
- * The Shop class controls the cost of the items in the Treasure Hunt game.<p>
- * The Shop class also acts as a go between for the Hunter's buyItem() method.<p>
+ * The Shop class controls the cost of the items in the Treasure Hunt game. <p>
+ * The Shop class also acts as a go between for the Hunter's buyItem() method. <p>
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
-
-import java.util.Scanner;
 
 public class Shop {
     // constants
@@ -21,16 +21,20 @@ public class Shop {
     private double markdown;
     private Hunter customer;
 
-    // constructor
+    /**
+     * The Shop constructor takes in a markdown value and leaves customer null until one enters the shop.
+     *
+     * @param markdown Percentage of markdown for selling items in decimal format.
+     */
     public Shop(double markdown) {
         this.markdown = markdown;
-        customer = null;
+        customer = null; // is set in the enter method
     }
 
     /**
      * Method for entering the shop.
      *
-     * @param hunter  the Hunter entering the shop
+     * @param hunter the Hunter entering the shop
      * @param buyOrSell String that determines if hunter is "B"uying or "S"elling
      */
     public void enter(Hunter hunter, String buyOrSell) {

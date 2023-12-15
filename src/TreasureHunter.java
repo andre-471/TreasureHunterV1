@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * This class is responsible for controlling the Treasure Hunter game.<p>
  * It handles the display of the menu and the processing of the player's choices.<p>
@@ -5,8 +7,6 @@
  *
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
-
-import java.util.Scanner;
 
 public class TreasureHunter {
     // static variables

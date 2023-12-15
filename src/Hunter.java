@@ -42,8 +42,8 @@ public class Hunter {
     /**
      * Buys an item from a shop.
      *
-     * @param item       The item the hunter is buying.
-     * @param costOfItem the cost of the item
+     * @param item The item the hunter is buying.
+     * @param costOfItem The cost of the item.
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
@@ -60,7 +60,7 @@ public class Hunter {
      * The Hunter is selling an item to a shop for gold.<p>
      * This method checks to make sure that the seller has the item and that the seller is getting more than 0 gold.
      *
-     * @param item         The item being sold.
+     * @param item The item being sold.
      * @param buyBackPrice the amount of gold earned from selling the item
      * @return true if the item was successfully sold.
      */
@@ -75,7 +75,7 @@ public class Hunter {
     }
 
     /**
-     * Removes an item from the kit.
+     * Removes an item from the kit by setting the index of the item to null.
      *
      * @param item The item to be removed.
      */
@@ -106,7 +106,7 @@ public class Hunter {
     }
 
     /**
-     * Searches the kit Array for a specified item.
+     * Checks if the kit Array has the specified item.
      *
      * @param item The search item
      * @return true if the item is found.
@@ -122,9 +122,9 @@ public class Hunter {
         return false;
     }
 
-    /**
+     /**
      * Returns a printable representation of the inventory, which
-     * is a list of the items in kit, with the KIT_DELIMITER replaced with a space
+     * is a list of the items in kit, with a space between each item.
      *
      * @return The printable String representation of the inventory.
      */
@@ -132,9 +132,9 @@ public class Hunter {
         String printableKit = "";
         String space = " ";
 
-        for (String string : kit) {
-            if (string != null) {
-                printableKit += string + space;
+        for (String item : kit) {
+            if (item != null) {
+                printableKit += item + space;
             }
         }
 
@@ -153,9 +153,9 @@ public class Hunter {
     }
 
     /**
-     * Searches kit for the specified value.
+     * Searches kit Array for the index of the specified value.
      *
-     * @param item Value to look for.
+     * @param item String to look for.
      * @return The index of the item, or -1 if not found.
      */
     private int findItemInKit(String item) {
